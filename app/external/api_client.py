@@ -50,3 +50,45 @@ def fetch_trending_movies():
     response = requests.get(url, headers=headers).json()
     results = response['results'][:10]
     pprint(results)
+
+def fetch_movie_details_safe(movie_id: int):
+    """
+    Fetch movie details, returning an empty dict instead of None if failed.
+    """
+    data = fetch_movie_details(movie_id)
+    return data or {}
+
+def fetch_multiple_movies(movie_ids: list[int]):
+    """
+    Fetch details for multiple movies given a list of IDs.
+    """
+    movies = []
+    for movie_id in movie_ids:
+        movie_data = fetch_movie_details_safe(movie_id)
+        if movie_data:
+            movies.append(movie_data)
+    return movies
+
+def fetch_popular_movies(page: int = 1):
+    """
+    Fetch popular movies (useful for browsing interfaces).
+    """
+    url = f"{BASE_URL}/movie/popular?language=en-US&page={page}"
+    response = requests.get(url, headers=headers).json()
+    return response.get('results', [])
+
+import time
+
+def make_request_with_retry(url: str, retries: int = 3, delay: float = 1.0):
+    """
+    Perform a GET request with retries if the server responds with errors.
+    """
+    for attempt in range(retries):
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Attempt {attempt + 1} failed (status: {response.status_code}). Retrying...")
+            time.sleep(delay)
+    print("All attempts failed.")
+    return None
