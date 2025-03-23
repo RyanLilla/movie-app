@@ -1,6 +1,7 @@
 from urllib import response
 import requests
 from pprint import pprint
+import time
 
 
 # Configurations
@@ -76,8 +77,6 @@ def fetch_popular_movies(page: int = 1):
     url = f"{BASE_URL}/movie/popular?language=en-US&page={page}"
     response = requests.get(url, headers=headers).json()
     return response.get('results', [])
-
-import time
 
 def make_request_with_retry(url: str, retries: int = 3, delay: float = 1.0):
     """
