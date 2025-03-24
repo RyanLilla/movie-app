@@ -66,6 +66,9 @@ coverage.xml
 # SQLite database
 *.sqlite3
 
+# Databases
+app/db/*.db
+
 # Log files
 *.log
 
