@@ -25,6 +25,13 @@ def fetch_movie_details(movie_id: int):
         print(f"Error: Unable to fetch movie with ID {movie_id}")
         return None
 
+def fetch_movie_details_safe(movie_id: int):
+    """
+    Fetch movie details, returning an empty dict instead of None if failed.
+    """
+    data = fetch_movie_details(movie_id)
+    return data or {}
+
 def search_movie_by_query(query: str|None):
     """
     Search for movies by their original, translated and alternative titles.
@@ -51,13 +58,6 @@ def fetch_trending_movies():
     response = requests.get(url, headers=headers).json()
     results = response['results'][:10]
     pprint(results)
-
-def fetch_movie_details_safe(movie_id: int):
-    """
-    Fetch movie details, returning an empty dict instead of None if failed.
-    """
-    data = fetch_movie_details(movie_id)
-    return data or {}
 
 def fetch_multiple_movies(movie_ids: list[int]):
     """
