@@ -1,10 +1,8 @@
-from fastapi.datastructures import Default
-from sqlalchemy import true
 from sqlmodel import SQLModel, Field
 from typing import Optional
 
 class Movie(SQLModel, table=True):
-    id: Optional[int] = Field(Default=None, primary_key=True)
+    id: Optional[int] = Field(default=None, primary_key=True)
     genre_ids: Optional[str] = None  # Stored as TEXT, possibly comma-separated or JSON string
     overview: Optional[str] = None
     popularity: Optional[int] = None

@@ -1,6 +1,6 @@
-from app.db.models import Movie
-from app.external.api_client import fetch_movie_details_safe
-from app.repositories import movie_repository
+from db.models import Movie
+from external.api_client import fetch_movie_details_safe
+from repositories import movie_repository
 
 def get_or_fetch_movie(movie_id: int):
     movie = movie_repository.get_movie_by_id(movie_id)
