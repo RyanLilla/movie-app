@@ -1,17 +1,19 @@
-from db.models import Movie
-from external.api_client import fetch_movie_details_safe
-from repositories import movie_repository
+from pprint import pprint
+from app.db.models import Movie
+from app.external.api_client import fetch_movie_details_safe
+from app.repositories import movie_repository
 
 def get_or_fetch_movie(movie_id: int):
     movie = movie_repository.get_movie_by_id(movie_id)
     if movie:
+        pprint(movie)
         return movie
 
     api_data = fetch_movie_details_safe(movie_id)
     movie = Movie(
         id=api_data["id"],
         title=api_data["title"],
-        description=api_data.get("overview"),
+        overview=api_data.get("overview"),
         release_date=api_data.get("release_date"),
         popularity=api_data.get("popularity"),
         vote_average=api_data.get("vote_average"),
