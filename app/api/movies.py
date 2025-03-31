@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException
 
 from app.db.schemas import MovieResponse
-from app.services.movie_service import get_or_fetch_movie
+from app.services.movie_service import get_or_fetch_movie, get_all_movies_from_db
 
 
 router = APIRouter()
 
 @router.get("/movie")
 async def get_movie_by_id():
-    return {"message": "Hello, Movie App : Movie Controller"}
+    return {"message": "Movie App : Movie Route"}
 
 @router.get("/movie/{movie_id}", response_model=MovieResponse)
 async def get_movie_by_id(movie_id: int):
@@ -17,3 +17,12 @@ async def get_movie_by_id(movie_id: int):
         raise HTTPException(status_code=404, detail="No movie found for the specified ID.")
     
     return movie
+
+@router.get("/movies/all", response_model=list[MovieResponse])
+async def get_all_movies():
+    movies = get_all_movies_from_db()
+    if not movies:
+        raise HTTPException(status_code=404, detail="No movies found.")
+    
+    return movies
+    

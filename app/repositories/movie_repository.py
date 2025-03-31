@@ -6,6 +6,10 @@ def get_movie_by_id(movie_id: int):
     with get_session() as session:
         return session.exec(select(Movie).where(Movie.id == movie_id)).first()
 
+def get_all_movies():
+    with get_session() as session:
+        return session.exec(select(Movie)).all()
+
 def insert_movie(movie: Movie):
     with get_session() as session:
         session.add(movie)

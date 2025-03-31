@@ -6,7 +6,7 @@ from app.repositories import movie_repository
 def get_or_fetch_movie(movie_id: int):
     movie = movie_repository.get_movie_by_id(movie_id)
     if movie:
-        pprint(movie)
+        # pprint(movie)
         return movie
 
     api_data = fetch_movie_details_safe(movie_id)
@@ -22,3 +22,8 @@ def get_or_fetch_movie(movie_id: int):
     )
     return movie_repository.insert_movie(movie)
     # print(f"Movie not found. Calling TMDB's API instead.\n{api_data.json()}")
+    
+def get_all_movies_from_db():
+    movies = movie_repository.get_all_movies()
+    if movies:
+        return movies
