@@ -3,7 +3,20 @@ from app.db.models import Movie
 from app.external.api_client import fetch_movie_details_safe
 from app.repositories import movie_repository
 
-def get_or_fetch_movie(movie_id: int):
+def get_movie_by_id(movie_id: int):
+    """
+    Retrieve a movie by its ID.
+
+    This function first attempts to fetch the movie from the local database.
+    If the movie is not found, it fetches the movie details from an external API,
+    creates a new Movie object, and inserts it into the database.
+
+    Args:
+        movie_id (int): The ID of the movie to retrieve.
+
+    Returns:
+        Movie: The movie object retrieved from the database or created from the API data.
+    """
     movie = movie_repository.get_movie_by_id(movie_id)
     if movie:
         # pprint(movie)
@@ -24,6 +37,14 @@ def get_or_fetch_movie(movie_id: int):
     # print(f"Movie not found. Calling TMDB's API instead.\n{api_data.json()}")
     
 def get_all_movies_from_db():
+    """
+    Retrieve all movies from the local database.
+
+    Returns:
+        list[Movie]: A list of Movie objects retrieved from the database.
+                     Returns an empty list if no movies are found.
+    """
     movies = movie_repository.get_all_movies()
     if movies:
         return movies
+    
