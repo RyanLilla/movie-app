@@ -3,6 +3,7 @@ from app.db.models import Movie
 from app.external.api_client import fetch_movie_details_safe
 from app.repositories import movie_repository
 
+
 def get_movie_by_id(movie_id: int):
     """
     Retrieve a movie by its ID.
