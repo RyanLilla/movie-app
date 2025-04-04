@@ -3,7 +3,7 @@ from pprint import pprint
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api import movies
+from .api import movie_router
 from .db.database import create_db_and_tables
 # from .services.movie_service import get_or_fetch_movie
 
@@ -26,7 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(movies.router)
+app.include_router(movie_router.router)
 
 @app.get("/")
 async def root():
