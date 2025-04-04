@@ -15,6 +15,19 @@ def get_movie_by_id(movie_id: int):
     """
     with get_session() as session:
         return session.exec(select(Movie).where(Movie.id == movie_id)).first()
+    
+def get_movie_by_title(title: str):
+    """
+    Retrieve a movie by its title from the database.
+
+    Args:
+        title (str): The title of the movie to retrieve.
+
+    Returns:
+        Movie: The movie object if found, otherwise None.
+    """
+    with get_session() as session:
+        return session.exec(select(Movie).where(Movie.title == title)).first()
 
 def get_all_movies():
     """

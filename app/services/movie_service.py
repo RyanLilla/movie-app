@@ -1,6 +1,6 @@
 from pprint import pprint
 from app.db.models import Movie
-from app.external.api_client import fetch_movie_details_safe
+from app.external import api_client
 from app.repositories import movie_repository
 
 
@@ -23,19 +23,44 @@ def get_watched_movie_by_id(movie_id: int):
         # pprint(movie)
         return movie
 
-    api_data = fetch_movie_details_safe(movie_id)
-    movie = Movie(
-        id=api_data["id"],
-        title=api_data["title"],
-        overview=api_data.get("overview"),
-        release_date=api_data.get("release_date"),
-        popularity=api_data.get("popularity"),
-        vote_average=api_data.get("vote_average"),
-        vote_count=api_data.get("vote_count"),
-        genre_ids=str(api_data.get("genre_ids"))  # store list as string
-    )
-    return movie
-    # return save_watched_movie_to_database(movie)
+    api_data = api_client.fetch_movie_details_safe(movie_id)
+    
+    if api_data:
+        movie = Movie(
+            id=api_data["id"],
+            title=api_data["title"],
+            overview=api_data.get("overview"),
+            release_date=api_data.get("release_date"),
+            popularity=api_data.get("popularity"),
+            vote_average=api_data.get("vote_average"),
+            vote_count=api_data.get("vote_count"),
+            genre_ids=str(api_data.get("genre_ids"))
+        )
+        return movie
+        # return save_watched_movie_to_database(movie)
+    
+    return None
+
+def search_movie_by_title(query: str):
+    movie = movie_repository.get_movie_by_title(query)
+    if movie:
+        return movie
+    
+    api_data = api_client.search_movie_by_query(query=query)
+    if api_data:
+        movie = Movie(
+            id=api_data["id"],
+            title=api_data["title"],
+            overview=api_data.get("overview"),
+            release_date=api_data.get("release_date"),
+            popularity=api_data.get("popularity"),
+            vote_average=api_data.get("vote_average"),
+            vote_count=api_data.get("vote_count"),
+            genre_ids=str(api_data.get("genre_ids"))
+        )
+        return movie
+    
+    return None
 
 def save_watched_movie_to_database(movie):
     return movie_repository.insert_movie(movie)

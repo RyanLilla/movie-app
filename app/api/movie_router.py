@@ -29,6 +29,29 @@ async def get_watched_movie_by_id(movie_id: int):
     
     return movie
 
+@router.get("/search/movie/", response_model=MovieResponse)
+async def search_movie_by_title(query: str):
+    """
+    Search for movies by their original, translated, and alternative titles.
+
+    Args:
+        query (str): The title of the movie to search for.
+
+    Returns:
+        MovieResponse: The movie details if found.
+
+    Raises:
+        HTTPException: If no movie is found for the specified query.
+    """
+    if not query:
+        query = "The Gorge"
+    
+    movie = movie_service.search_movie_by_title(query=query)
+    if not movie:
+        raise HTTPException(status_code=404, detail="No movie found for the specified query.")
+    
+    return movie
+
 @router.get("/movies/all", response_model=list[MovieResponse])
 async def get_all_watched_movies():
     """
