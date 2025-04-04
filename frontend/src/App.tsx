@@ -1,11 +1,11 @@
-import './App.css'
-import MovieDetails from "./components/MovieDetails";
+import './App.css';
+import SearchMovie from './components/SearchMovie';
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <h1>Movie Lookup</h1>
-      <MovieDetails />
+      <SearchMovie />
     </div>
   );
 }

@@ -21,7 +21,20 @@ export const fetchMovieById = async (movieId: number): Promise<Movie> => {
     const response = await axios.get<Movie>(`${API_BASE_URL}/movie/${movieId}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching movie:", error);
+    console.error("Error fetching movie by ID:", error);
     throw error;
   }
 };
+
+// Function to fetch a movie by title
+export const fetchMovieByTitle = async (title: string): Promise<Movie> => {
+  try {
+    const response = await axios.get<Movie>(`${API_BASE_URL}/search/movie`, {
+      params: { query: title },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching movie by title:", error);
+    throw error;
+  }
+}
