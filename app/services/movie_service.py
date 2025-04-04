@@ -34,8 +34,11 @@ def get_watched_movie_by_id(movie_id: int):
         vote_count=api_data.get("vote_count"),
         genre_ids=str(api_data.get("genre_ids"))  # store list as string
     )
+    return movie
+    # return save_watched_movie_to_database(movie)
+
+def save_watched_movie_to_database(movie):
     return movie_repository.insert_movie(movie)
-    # print(f"Movie not found. Calling TMDB's API instead.\n{api_data.json()}")
     
 def get_all_watched_movies_from_db():
     """
