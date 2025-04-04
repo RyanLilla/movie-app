@@ -29,7 +29,7 @@ async def get_watched_movie_by_id(movie_id: int):
     
     return movie
 
-@router.get("/search/movie/", response_model=MovieResponse)
+@router.get("/search/movie", response_model=MovieResponse)
 async def search_movie_by_title(query: str):
     """
     Search for movies by their original, translated, and alternative titles.

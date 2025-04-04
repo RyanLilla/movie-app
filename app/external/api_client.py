@@ -45,9 +45,8 @@ def search_movie_by_query(query: str|None):
     url = f"{BASE_URL}/search/movie?query={query}&include_adult=false&language=en-US&page=1"
 
     response = requests.get(url, headers=headers).json()
-    results = response['results'][0]
-    # pprint(results)
-    return results
+    if response['results']:
+        return response['results'][0]
     
 def fetch_trending_movies():
     """

@@ -42,9 +42,9 @@ def get_watched_movie_by_id(movie_id: int):
     return None
 
 def search_movie_by_title(query: str):
-    movie = movie_repository.get_movie_by_title(query)
-    if movie:
-        return movie
+    # movie = movie_repository.get_movie_by_title(query)
+    # if movie:
+    #     return movie
     
     api_data = api_client.search_movie_by_query(query=query)
     if api_data:
