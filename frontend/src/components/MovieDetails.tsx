@@ -2,7 +2,7 @@ import { useState } from "react";
 import { fetchMovieById } from "../services/movieService";
 
 const MovieDetails = () => {
-  const [movieId, setMovieId] = useState<number>(1013850); // Example movie ID
+  const [movieId, setMovieId] = useState<number>(550); // Example movie ID
   const [movie, setMovie] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

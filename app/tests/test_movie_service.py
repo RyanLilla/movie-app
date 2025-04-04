@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
-from services.movie_service import get_movie_by_id
+from services.movie_service import get_watched_movie_by_id
 from db.models import Movie
 
 @pytest.fixture
@@ -26,7 +26,7 @@ def test_get_or_fetch_movie_returns_existing_movie(
     
     mock_get_movie_by_id.return_value = mock_movie  # Movie found in DB
 
-    movie = get_movie_by_id(1)
+    movie = get_watched_movie_by_id(1)
 
     assert movie.id == mock_movie.id
     assert movie.title == "Inception"
@@ -57,7 +57,7 @@ def test_get_or_fetch_movie_fetches_from_api_and_saves(
     mock_fetch_movie_details_safe.return_value = mock_api_data
     mock_insert_movie.return_value = Movie(**mock_api_data)
 
-    movie = get_movie_by_id(1)
+    movie = get_watched_movie_by_id(1)
 
     assert movie.id == 1
     assert movie.title == "Inception"

@@ -4,7 +4,7 @@ from app.external.api_client import fetch_movie_details_safe
 from app.repositories import movie_repository
 
 
-def get_movie_by_id(movie_id: int):
+def get_watched_movie_by_id(movie_id: int):
     """
     Retrieve a movie by its ID.
 
@@ -37,7 +37,7 @@ def get_movie_by_id(movie_id: int):
     return movie_repository.insert_movie(movie)
     # print(f"Movie not found. Calling TMDB's API instead.\n{api_data.json()}")
     
-def get_all_movies_from_db():
+def get_all_watched_movies_from_db():
     """
     Retrieve all movies from the local database.
 
