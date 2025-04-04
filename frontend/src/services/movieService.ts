@@ -18,7 +18,7 @@ interface Movie {
 // Function to fetch a movie by ID
 export const fetchMovieById = async (movieId: number): Promise<Movie> => {
   try {
-    const response = await axios.get<Movie>(`${API_BASE_URL}/movies/${movieId}`);
+    const response = await axios.get<Movie>(`${API_BASE_URL}/movie/${movieId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching movie:", error);

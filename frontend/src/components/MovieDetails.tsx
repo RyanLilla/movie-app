@@ -40,7 +40,6 @@ const MovieDetails = () => {
           <h3>{movie.title}</h3>
           <p>{movie.overview}</p>
           <p>Released: {movie.release_date}</p>
-          <p>Popularity: {movie.popularity}</p>
         </div>
       )}
     </div>

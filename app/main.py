@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 from pprint import pprint
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from .api import movies
 from .db.database import create_db_and_tables
@@ -16,6 +17,15 @@ async def lifespan(app: FastAPI):
     yield
     
 app = FastAPI(lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # React dev server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(movies.router)
 
 @app.get("/")
