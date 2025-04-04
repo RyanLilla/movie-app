@@ -11,6 +11,7 @@ app/.venv/
 venv/
 .env/
 .venv/
+*.env
 
 # VSCode settings
 .vscode/
