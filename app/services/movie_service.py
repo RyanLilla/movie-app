@@ -50,21 +50,23 @@ def search_movie_by_title(query: str):
     
     api_data = api_client.search_movie_by_query(query=query)
     if api_data:
-        movie = Movie(
-            id=api_data["id"],
-            title=api_data["title"],
-            overview=api_data.get("overview"),
-            release_date=api_data.get("release_date"),
-            popularity=api_data.get("popularity"),
-            vote_average=api_data.get("vote_average"),
-            vote_count=api_data.get("vote_count"),
-            genre_ids=str(api_data.get("genre_ids")),
-            poster_url=f"https://image.tmdb.org/t/p/original{api_data.get('poster_path')}",
-            backdrop_url=f"https://image.tmdb.org/t/p/original{api_data.get('backdrop_path')}"
-        )
-        # pprint(movie)
-        return movie
-    
+        movie_list = []
+        for movie_item in api_data:
+            movie = Movie(
+                id=movie_item["id"],
+                title=movie_item["title"],
+                overview=movie_item.get("overview"),
+                release_date=movie_item.get("release_date"),
+                popularity=movie_item.get("popularity"),
+                vote_average=movie_item.get("vote_average"),
+                vote_count=movie_item.get("vote_count"),
+                genre_ids=str(movie_item.get("genre_ids")),
+                poster_url=f"https://image.tmdb.org/t/p/original{movie_item.get('poster_path')}",
+                backdrop_url=f"https://image.tmdb.org/t/p/original{movie_item.get('backdrop_path')}"
+            )
+            # pprint(movie)
+            movie_list.append(movie)
+        return movie_list
     return None
 
 def save_watched_movie_to_database(movie):
