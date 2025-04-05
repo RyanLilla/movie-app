@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { fetchMovieByTitle } from "../services/movieService";
 import type { Movie } from "../types/index";
+import "./css/SearchMovie.css";
 
 const SearchMovie = () => {
   const [query, setQuery] = useState("");
@@ -18,38 +19,45 @@ const SearchMovie = () => {
         setMovies([results]);
     } catch (error) {
         console.error("Error fetching movie:", error);
-        setError("Failed to fetch movie: {query}. Please try again.");
+        setError(`Failed to fetch movie: ${query}. Please try again.`);
     } finally {
         setLoading(false);
     }
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <h2 className="text-xl font-semibold mb-4">Search for a Movie</h2>
-      <div className="flex gap-2 mb-4">
+    <div className="search-container">
+      <h2 className="search-heading">Search for a Movie</h2>
+      <div className="search-controls">
         <input
           type="text"
           placeholder="Enter movie title"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="border px-2 py-1 flex-grow rounded"
+          className="search-input"
         />
         <button
           onClick={handleSearch}
-          className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
+          className="search-button"
         >
           Search
         </button>
       </div>
 
       {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="search-error">{error}</p>}
 
       {movies.length > 0 && (
-        <div className="border p-3 rounded shadow">
-          <h3 className="font-bold">{movies[0].title}</h3>
-          <p className="text-sm text-gray-600">Released: {movies[0].release_date}</p>
+        <div className="movie-card">
+          <h3 className="movie-title">{movies[0].title}</h3>
+          {movies[0].poster_url && (
+            <img
+              src={movies[0].poster_url}
+              alt={`${movies[0].title} Poster`}
+              className="poster"
+            />
+          )}
+          <p className="movie-release">Released: {movies[0].release_date}</p>
           <p>{movies[0].overview}</p>
         </div>
       )}
