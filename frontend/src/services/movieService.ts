@@ -13,6 +13,8 @@ interface Movie {
   vote_average: number;
   vote_count: number;
   genre_ids: number[];
+  poster_url: string;
+  backdrop_url: string;
 }
 
 // Function to fetch a movie by ID
