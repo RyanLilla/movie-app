@@ -4,63 +4,87 @@
     border-radius: 6px;
     margin-bottom: 12px;
 }
- .search-container {
-   padding: 1rem;
-   max-width: 40rem;
-   margin: 0 auto;
- }
- 
- .search-heading {
-   font-size: 1.25rem;
-   font-weight: 600;
-   margin-bottom: 1rem;
- }
- 
- .search-controls {
-   display: flex;
-   gap: 0.5rem;
-   margin-bottom: 1rem;
- }
- 
- .search-input {
-   flex-grow: 1;
-   padding: 0.25rem 0.5rem;
-   border: 1px solid #ccc;
-   border-radius: 4px;
- }
- 
- .search-button {
-   background-color: #2563eb;
-   color: white;
-   padding: 0.25rem 1rem;
-   border: none;
-   border-radius: 4px;
-   cursor: pointer;
- }
- 
- .search-button:hover {
-   background-color: #1e40af;
- }
- 
- .search-error {
-   color: #dc2626;
- }
- 
- .movie-card {
-   border: 1px solid #ddd;
-   padding: 1rem;
-   border-radius: 6px;
-   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
- }
- 
- .movie-title {
-   font-weight: 700;
-   font-size: 1.125rem;
-   margin-bottom: 0.5rem;
- }
- 
- .movie-release {
-   font-size: 0.875rem;
-   color: #4b5563;
-   margin-bottom: 0.5rem;
- }
+.search-container {
+  padding: 1rem;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.search-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.search-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.25rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #1e40af;
+}
+
+.search-error {
+  color: #dc2626;
+}
+
+.movie-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%; /* ensures equal height inside the grid cell */
+  box-sizing: border-box;
+}
+
+.movie-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  min-height: 3em;        /* ensures space for two lines */
+  max-height: 3em;         /* allows two lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;    /* limits to 2 lines */
+  -webkit-box-orient: vertical;
+  line-clamp: 2;           /* standard property for compatibility */
+  box-orient: vertical;    /* standard property for compatibility */
+}
+
+.movie-release {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: stretch;
+}
