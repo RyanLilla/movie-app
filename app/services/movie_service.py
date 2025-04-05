@@ -34,7 +34,9 @@ def get_watched_movie_by_id(movie_id: int):
             popularity=api_data.get("popularity"),
             vote_average=api_data.get("vote_average"),
             vote_count=api_data.get("vote_count"),
-            genre_ids=str(api_data.get("genre_ids"))
+            genre_ids=str(api_data.get("genre_ids")),
+            poster_url=f"https://image.tmdb.org/t/p/original{api_data.get('poster_path')}",
+            backdrop_url=f"https://image.tmdb.org/t/p/original{api_data.get('backdrop_path')}"
         )
         return movie
         # return save_watched_movie_to_database(movie)
@@ -56,8 +58,11 @@ def search_movie_by_title(query: str):
             popularity=api_data.get("popularity"),
             vote_average=api_data.get("vote_average"),
             vote_count=api_data.get("vote_count"),
-            genre_ids=str(api_data.get("genre_ids"))
+            genre_ids=str(api_data.get("genre_ids")),
+            poster_url=f"https://image.tmdb.org/t/p/original{api_data.get('poster_path')}",
+            backdrop_url=f"https://image.tmdb.org/t/p/original{api_data.get('backdrop_path')}"
         )
+        # pprint(movie)
         return movie
     
     return None
@@ -76,4 +81,3 @@ def get_all_watched_movies_from_db():
     movies = movie_repository.get_all_movies()
     if movies:
         return movies
-    

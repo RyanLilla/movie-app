@@ -46,6 +46,7 @@ def search_movie_by_query(query: str|None):
 
     response = requests.get(url, headers=headers).json()
     if response['results']:
+        # pprint(response['results'][0])
         return response['results'][0]
     
 def fetch_trending_movies():

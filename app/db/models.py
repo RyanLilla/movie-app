@@ -13,3 +13,5 @@ class Movie(MovieBase, table=True):
     vote_average: Optional[int] = None
     vote_count: Optional[int] = None
     popularity: Optional[int] = None
+    poster_url: Optional[str] = None
+    backdrop_url: Optional[str] = None
