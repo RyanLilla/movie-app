@@ -29,9 +29,9 @@ export const fetchMovieById = async (movieId: number): Promise<Movie> => {
 };
 
 // Function to fetch a movie by title
-export const fetchMovieByTitle = async (title: string): Promise<Movie> => {
+export const fetchMovieByTitle = async (title: string): Promise<Movie[]> => {
   try {
-    const response = await axios.get<Movie>(`${API_BASE_URL}/search/movie`, {
+    const response = await axios.get<Movie[]>(`${API_BASE_URL}/search/movie`, {
       params: { query: title },
     });
     return response.data;

@@ -16,7 +16,7 @@ const SearchMovie = () => {
     setError("");
     try {
         const results = await fetchMovieByTitle(query);
-        setMovies([results]);
+        setMovies(results); // updated line
     } catch (error) {
         console.error("Error fetching movie:", error);
         setError(`Failed to fetch movie: ${query}. Please try again.`);
@@ -48,17 +48,21 @@ const SearchMovie = () => {
       {error && <p className="search-error">{error}</p>}
 
       {movies.length > 0 && (
-        <div className="movie-card">
-          <h3 className="movie-title">{movies[0].title}</h3>
-          {movies[0].poster_url && (
-            <img
-              src={movies[0].poster_url}
-              alt={`${movies[0].title} Poster`}
-              className="poster"
-            />
-          )}
-          <p className="movie-release">Released: {movies[0].release_date}</p>
-          <p>{movies[0].overview}</p>
+        <div className="movies-grid">
+          {movies.map((movie) => (
+            <div key={movie.id} className="movie-card">
+              <h3 className="movie-title">{movie.title}</h3>
+              {movie.poster_url && (
+                <img
+                  src={movie.poster_url}
+                  alt={`${movie.title} Poster`}
+                  className="poster"
+                />
+              )}
+              <p className="movie-release">Released: {movie.release_date}</p>
+              {/* <p>{movie.overview}</p> */}
+            </div>
+          ))}
         </div>
       )}
     </div>
