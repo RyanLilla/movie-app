@@ -40,3 +40,23 @@
 .read-the-docs {
   color: #888;
 }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.page-content {
+  padding-top: 60px; /* or whatever height your navbar actually is */
+  /* padding-top: 100px; /* Adjust depending on navbar height
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem; */
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}

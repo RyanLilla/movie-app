@@ -1,22 +1,37 @@
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* keep it above other elements */
     background-color: #333;
     padding: 10px 20px;
-  }
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
   
-  .navbar-list {
+.navbar-list {
     list-style: none;
     display: flex;
     gap: 15px;
     margin: 0;
     padding: 0;
-  }
+}
   
-  .navbar-link {
-    color: white;
+.navbar-link {
+    color: blue;
     text-decoration: none;
     font-weight: bold;
-  }
+}
   
-  .navbar-link:hover {
+.navbar-link:hover {
     text-decoration: underline;
-  }
+}
