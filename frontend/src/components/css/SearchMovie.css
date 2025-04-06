@@ -1,9 +1,10 @@
 .poster {
-    width: 300px;
-    height: 450px;
-    border-radius: 6px;
-    margin-bottom: 12px;
+  width: 300px;
+  height: 450px;
+  border-radius: 6px;
+  margin-bottom: 12px;
 }
+
 .search-container {
   padding: 1rem;
   max-width: 40rem;
@@ -11,7 +12,7 @@
 }
 
 .search-heading {
-  font-size: 1.25rem;
+  font-size: 1.50rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
