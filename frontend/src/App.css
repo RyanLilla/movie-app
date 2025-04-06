@@ -47,15 +47,18 @@ body {
 }
 
 .page-content {
-  padding-top: 60px; /* or whatever height your navbar actually is */
-  /* padding-top: 100px; /* Adjust depending on navbar height
+  flex: 1;
+  padding-top: 60px; /* Adjusted from 100px */
   max-width: 1200px;
   margin: 0 auto;
   padding-left: 1rem;
-  padding-right: 1rem; */
+  padding-right: 1rem;
 }
 
 .app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
