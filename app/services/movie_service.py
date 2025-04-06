@@ -52,6 +52,9 @@ def search_movie_by_title(query: str):
     if api_data:
         movie_list = []
         for movie_item in api_data:
+            if movie_item.get("original_language") != "en":
+                continue
+            
             movie = Movie(
                 id=movie_item["id"],
                 title=movie_item["title"],
@@ -64,7 +67,7 @@ def search_movie_by_title(query: str):
                 poster_url=f"https://image.tmdb.org/t/p/original{movie_item.get('poster_path')}",
                 backdrop_url=f"https://image.tmdb.org/t/p/original{movie_item.get('backdrop_path')}"
             )
-            # pprint(movie)
+            # pprint(movie_item)
             movie_list.append(movie)
         return movie_list
     return None

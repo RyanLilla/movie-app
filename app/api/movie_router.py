@@ -1,3 +1,4 @@
+import pprint
 from fastapi import APIRouter, HTTPException
 import app.services.movie_service as movie_service
 from app.db.schemas import MovieResponse
