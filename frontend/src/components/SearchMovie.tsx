@@ -28,7 +28,13 @@ const SearchMovie = () => {
   return (
     <div className="search-container">
       <h2 className="search-heading">Search for a Movie</h2>
-      <div className="search-controls">
+      <form
+        className="search-controls"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSearch();
+        }}
+      >
         <input
           type="text"
           placeholder="Enter movie title"
@@ -36,13 +42,10 @@ const SearchMovie = () => {
           onChange={(e) => setQuery(e.target.value)}
           className="search-input"
         />
-        <button
-          onClick={handleSearch}
-          className="search-button"
-        >
+        <button type="submit" className="search-button">
           Search
         </button>
-      </div>
+      </form>
 
       {loading && <p>Loading...</p>}
       {error && <p className="search-error">{error}</p>}
