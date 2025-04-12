@@ -30,6 +30,12 @@ app.include_router(movie_router.router)
 
 @app.get("/")
 async def root():
+    update_movie = False
+    if update_movie:
+        from .utils.movie_utils import MovieUtils
+        MovieUtils.update_movie_urls()
+        print("Movie URLs updated successfully!")
+
     return {"message": "Hello, Movie App"}
 
 # def main():
