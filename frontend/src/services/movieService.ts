@@ -39,4 +39,15 @@ export const fetchMovieByTitle = async (title: string): Promise<Movie[]> => {
     console.error("Error fetching movie by title:", error);
     throw error;
   }
-}
+};
+
+// Function to fetch all watched movies from the database
+export const fetchWatchedMovies = async (): Promise<Movie[]> => {
+  try {
+    const response = await axios.get<Movie[]>(`${API_BASE_URL}/movies/all`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching watched movies:", error);
+    throw error;
+  }
+};
