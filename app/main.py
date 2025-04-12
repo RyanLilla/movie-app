@@ -3,7 +3,7 @@ from pprint import pprint
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api import movie_router
+from .routers import movie_router
 from .db.database import create_db_and_tables
 # from .services.movie_service import get_or_fetch_movie
 
