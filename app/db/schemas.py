@@ -1,7 +1,11 @@
 from sqlmodel import SQLModel
 from typing import Optional
 
-from app.db.models import MovieBase
+
+class MovieBase(SQLModel):
+    overview: Optional[str] = None
+    release_date: Optional[str] = None
+    title: Optional[str] = None
 
 class MovieResponse(MovieBase):
     id: int
@@ -15,3 +19,19 @@ class MovieCreate(SQLModel):
 class MovieUpdate(SQLModel):
     # TODO
     ...
+
+class ProductionCompanyBase(SQLModel):
+    name: str
+    logo_path: Optional[str] = None
+    origin_country: Optional[str] = None
+
+class ProductionCompanyCreate(ProductionCompanyBase):
+    id: int
+
+class ProductionCompanyResponse(ProductionCompanyBase):
+    id: int
+
+# Join table schema (if needed)
+class MovieProductionCompanyLink(SQLModel):
+    movie_id: int
+    company_id: int
