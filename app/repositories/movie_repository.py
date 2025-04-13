@@ -1,6 +1,6 @@
 from sqlmodel import select
 from app.db.database import get_session
-from app.db.models import Movie
+from app.db.models import Movie, Genre, MovieGenreLink
 
 
 def get_movie_by_id(movie_id: int):
@@ -57,3 +57,22 @@ def insert_movie(movie: Movie):
         session.commit()
         session.refresh(movie)
         return movie
+
+
+def get_genres_for_movie(movie_id: int):
+    """
+    Retrieve all genres associated with a given movie ID.
+
+    Args:
+        movie_id (int): The ID of the movie.
+
+    Returns:
+        list[Genre]: A list of Genre objects linked to the movie.
+    """
+    with get_session() as session:
+        statement = (
+            select(Genre)
+            .join(MovieGenreLink, Genre.id == MovieGenreLink.genre_id)
+            .where(MovieGenreLink.movie_id == movie_id)
+        )
+        return session.exec(statement).all()

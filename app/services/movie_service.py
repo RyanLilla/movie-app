@@ -1,5 +1,6 @@
 from pprint import pprint
 from app.db.models import Movie
+from app.db.schemas import MovieResponse
 from app.external import api_client
 from app.repositories import movie_repository
 
@@ -20,7 +21,8 @@ def get_watched_movie_by_id(movie_id: int):
     """
     movie = movie_repository.get_movie_by_id(movie_id)
     if movie:
-        # pprint(movie)
+        genres = movie_repository.get_genres_for_movie(movie.id)
+        movie.genres = genres
         return movie
 
     api_data = api_client.fetch_movie_details_safe(movie_id)
@@ -84,7 +86,7 @@ def search_movie_by_title(query: str):
 def save_watched_movie_to_database(movie):
     return movie_repository.insert_movie(movie)
     
-def get_all_watched_movies_from_db():
+def get_all_watched_movies_from_db() -> list[MovieResponse]:
     """
     Retrieve all movies from the local database.
 
@@ -94,4 +96,7 @@ def get_all_watched_movies_from_db():
     """
     movies = movie_repository.get_all_movies()
     if movies:
+        for movie in movies:
+            genres = movie_repository.get_genres_for_movie(movie.id)
+            movie.genres = genres
         return movies
