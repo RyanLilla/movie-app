@@ -3,9 +3,12 @@ import { fetchMovieByTitle } from "../services/movieService";
 import type { Movie } from "../types/index";
 import "./css/SearchMovie.css";
 
+
+type MovieReponse = Pick<Movie, "id" | "title" | "poster_url" | "release_date">;
+
 const SearchMovie = () => {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<MovieReponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -16,7 +19,7 @@ const SearchMovie = () => {
     setError("");
     try {
         const results = await fetchMovieByTitle(query);
-        setMovies(results); // updated line
+        setMovies(results);
     } catch (error) {
         console.error("Error fetching movie:", error);
         setError(`Failed to fetch movie: ${query}. Please try again.`);
