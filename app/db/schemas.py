@@ -30,8 +30,3 @@ class ProductionCompanyCreate(ProductionCompanyBase):
 
 class ProductionCompanyResponse(ProductionCompanyBase):
     id: int
-
-# Join table schema (if needed)
-class MovieProductionCompanyLink(SQLModel):
-    movie_id: int
-    company_id: int

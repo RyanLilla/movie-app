@@ -29,14 +29,24 @@ def get_watched_movie_by_id(movie_id: int):
         movie = Movie(
             id=api_data["id"],
             title=api_data["title"],
-            overview=api_data.get("overview"),
-            release_date=api_data.get("release_date"),
-            popularity=api_data.get("popularity"),
-            vote_average=api_data.get("vote_average"),
-            vote_count=api_data.get("vote_count"),
-            genre_ids=str(api_data.get("genre_ids")),
+            overview=api_data["overview"],
+            release_date=api_data["release_date"],
+            vote_average=int(api_data["vote_average"]),
+            vote_count=api_data["vote_count"],
+            popularity=int(api_data["popularity"]),
             poster_url=f"https://image.tmdb.org/t/p/original{api_data.get('poster_path')}",
-            backdrop_url=f"https://image.tmdb.org/t/p/original{api_data.get('backdrop_path')}"
+            backdrop_url=f"https://image.tmdb.org/t/p/original{api_data.get('backdrop_path')}",
+            adult=api_data["adult"],
+            budget=api_data["budget"],
+            homepage=api_data["homepage"],
+            imdb_id=api_data["imdb_id"],
+            original_language=api_data["original_language"],
+            original_title=api_data["original_title"],
+            revenue=api_data["revenue"],
+            runtime=api_data["runtime"],
+            status=api_data["status"],
+            tagline=api_data["tagline"],
+            video=api_data["video"]
         )
         return movie
         # return save_watched_movie_to_database(movie)
@@ -63,7 +73,6 @@ def search_movie_by_title(query: str):
                 popularity=movie_item.get("popularity"),
                 vote_average=movie_item.get("vote_average"),
                 vote_count=movie_item.get("vote_count"),
-                genre_ids=str(movie_item.get("genre_ids")),
                 poster_url=f"https://image.tmdb.org/t/p/original{movie_item.get('poster_path')}",
                 backdrop_url=f"https://image.tmdb.org/t/p/original{movie_item.get('backdrop_path')}"
             )
