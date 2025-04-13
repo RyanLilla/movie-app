@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .routers import movie_router
 from .db.database import create_db_and_tables
+from .utils.movie_utils import MovieUtils
 # from .services.movie_service import get_or_fetch_movie
 
 
@@ -32,9 +33,11 @@ app.include_router(movie_router.router)
 async def root():
     update_movie = False
     if update_movie:
-        from .utils.movie_utils import MovieUtils
-        MovieUtils.update_movie_urls()
-        print("Movie URLs updated successfully!")
+        # MovieUtils.update_movie_urls()
+        # print("Movie URLs updated successfully!")
+        
+        movie_ids = []
+        # MovieUtils.bulk_add_movies_by_movie_ids(movie_ids)
 
     return {"message": "Hello, Movie App"}
 

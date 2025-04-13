@@ -79,3 +79,6 @@ app/db/*.db
 
 # IDEs
 .idea/
+
+# Mock data
+app/mock_data/
