@@ -46,6 +46,11 @@ const WatchedMovies = () => {
                 />
               )}
               <p className="movie-release">Released: {movie.release_date}</p>
+              {movie.genres && movie.genres.length > 0 && (
+                <p className="movie-genres">
+                  Genres: {movie.genres.map((genre) => genre.name).join(", ")}
+                </p>
+              )}
             </div>
           ))}
         </div>
