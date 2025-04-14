@@ -1,6 +1,6 @@
 from pprint import pprint
 from app.db.models import Movie
-from app.db.schemas import MovieResponse
+from app.db.schemas import MovieResponse, GenreResponse
 from app.external import api_client
 from app.repositories import movie_repository
 
@@ -88,15 +88,31 @@ def save_watched_movie_to_database(movie):
     
 def get_all_watched_movies_from_db() -> list[MovieResponse]:
     """
-    Retrieve all movies from the local database.
+    Retrieve all movies from the local database as MovieResponse objects.
 
     Returns:
-        list[Movie]: A list of Movie objects retrieved from the database.
-                     Returns an empty list if no movies are found.
+        list[MovieResponse]: A list of MovieResponse objects retrieved from the database.
     """
     movies = movie_repository.get_all_movies()
-    if movies:
-        for movie in movies:
-            genres = movie_repository.get_genres_for_movie(movie.id)
-            movie.genres = genres
-        return movies
+    movie_responses: list[MovieResponse] = []
+
+    for movie in movies:
+        genres = movie_repository.get_genres_for_movie(movie.id)
+        genre_responses = [GenreResponse(id=g.id, name=g.name) for g in genres]
+
+        movie_response = MovieResponse(
+            id=movie.id,
+            title=movie.title,
+            overview=movie.overview,
+            release_date=movie.release_date,
+            poster_url=movie.poster_url,
+            backdrop_url=movie.backdrop_url,
+            popularity=movie.popularity,
+            vote_average=movie.vote_average,
+            vote_count=movie.vote_count,
+            genres=genre_responses
+        )
+
+        movie_responses.append(movie_response)
+
+    return movie_responses

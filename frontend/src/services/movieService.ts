@@ -4,6 +4,11 @@ import axios from "axios";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Define an interface for movie data
+interface Genre {
+  id: number;
+  name: string;
+}
+
 interface Movie {
   id: number;
   title: string;
@@ -12,7 +17,7 @@ interface Movie {
   popularity: number;
   vote_average: number;
   vote_count: number;
-  genre_ids: number[];
+  genres: Genre[];
   poster_url: string;
   backdrop_url: string;
 }
