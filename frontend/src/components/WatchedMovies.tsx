@@ -9,6 +9,10 @@ const WatchedMovies = () => {
   const [error, setError] = useState("");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
 
+  const uniqueGenres = Array.from(
+    new Set(movies.flatMap((movie) => movie.genres.map((g) => g.name)))
+  );
+
   useEffect(() => {
     const getMovies = async () => {
       setLoading(true);
@@ -16,10 +20,6 @@ const WatchedMovies = () => {
       try {
         const results = await fetchWatchedMovies();
         setMovies(results);
-
-        const uniqueGenres = Array.from(
-          new Set(results.flatMap((movie) => movie.genres.map((g) => g.name)))
-        );
       } catch (error) {
         console.error("Error fetching watched movies:", error);
         setError("Failed to load watched movies.");
@@ -39,7 +39,7 @@ const WatchedMovies = () => {
 
   return (
     <div className="search-container">
-      <h2 className="search-heading">Watched Movies</h2>
+      <h2 className="search-heading">Watched</h2>
 
       {loading && <p>Loading...</p>}
       {error && <p className="search-error">{error}</p>}
@@ -50,12 +50,10 @@ const WatchedMovies = () => {
         className="genre-filter"
       >
         <option value="">All Genres</option>
-        {Array.from(
-          new Set(movies.flatMap((movie) => movie.genres.map((g) => g.name)))
-        ).map((genre) => (
-          <option key={genre} value={genre}>
-            {genre}
-          </option>
+        {uniqueGenres.map((genre) => (
+            <option key={genre} value={genre}>
+                {genre}
+            </option>
         ))}
       </select>
 
