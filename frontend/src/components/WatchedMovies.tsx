@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchWatchedMovies } from "../services/movieService";
-import type { Movie } from "../types/index";
+import type { Movie, Genre } from "../types/index";
 import "./css/SearchMovie.css";
 
 const WatchedMovies = () => {

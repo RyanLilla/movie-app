@@ -1,26 +1,8 @@
 import axios from "axios";
+import type { Movie, Genre } from "../types/index";
 
 // Get the API base URL from the .env file
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-// Define an interface for movie data
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  release_date: string;
-  popularity: number;
-  vote_average: number;
-  vote_count: number;
-  genres: Genre[];
-  poster_url: string;
-  backdrop_url: string;
-}
 
 // Function to fetch a movie by ID
 export const fetchMovieById = async (movieId: number): Promise<Movie> => {
