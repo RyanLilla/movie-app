@@ -44,18 +44,23 @@ const WatchedMovies = () => {
       {loading && <p>Loading...</p>}
       {error && <p className="search-error">{error}</p>}
 
-      <select
-        value={selectedGenre ?? ""}
-        onChange={(e) => setSelectedGenre(e.target.value || null)}
-        className="genre-filter"
-      >
-        <option value="">All Genres</option>
+      <div className="genre-tags">
+        <span
+          className={`genre-tag ${selectedGenre === null ? "selected" : ""}`}
+          onClick={() => setSelectedGenre(null)}
+        >
+          All Genres
+        </span>
         {uniqueGenres.map((genre) => (
-            <option key={genre} value={genre}>
-                {genre}
-            </option>
+          <span
+            key={genre}
+            className={`genre-tag ${selectedGenre === genre ? "selected" : ""}`}
+            onClick={() => setSelectedGenre(genre)}
+          >
+            {genre}
+          </span>
         ))}
-      </select>
+      </div>
 
       {filteredMovies.length > 0 && (
         <div className="movies-grid">
