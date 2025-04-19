@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { fetchWatchedMovies } from "../services/movieService";
 import type { Movie, Genre } from "../types/index";
 import "./css/SearchMovie.css";
+import MovieSearchBar from "./MovieSearchBar";
 
 const WatchedMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const uniqueGenres = Array.from(
     new Set(movies.flatMap((movie) => movie.genres.map((g) => g.name)))
@@ -31,11 +33,20 @@ const WatchedMovies = () => {
     getMovies();
   }, []);
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query.toLowerCase());
+  };
+
   const filteredMovies =
-    selectedGenres.length > 0
-      ? movies.filter((movie) =>
-          movie.genres.some((genre) => selectedGenres.includes(genre.name))
-        )
+    selectedGenres.length > 0 || searchQuery
+      ? movies.filter((movie) => {
+          const matchesGenre =
+            selectedGenres.length === 0 ||
+            movie.genres.some((genre) => selectedGenres.includes(genre.name));
+          const matchesSearch =
+            !searchQuery || movie.title.toLowerCase().includes(searchQuery);
+          return matchesGenre && matchesSearch;
+        })
       : movies;
 
   const toggleGenre = (genre: string) => {
@@ -49,6 +60,7 @@ const WatchedMovies = () => {
   return (
     <div className="search-container">
       <h2 className="search-heading oooh-baby-regular">Watch History</h2>
+      <MovieSearchBar onSearch={handleSearch} />
 
       {loading && <p>Loading...</p>}
       {error && <p className="search-error">{error}</p>}

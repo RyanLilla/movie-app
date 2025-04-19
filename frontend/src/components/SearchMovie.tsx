@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { fetchMovieByTitle } from "../services/movieService";
 import type { Movie } from "../types/index";
+import MovieSearchBar from "./MovieSearchBar";
 import "./css/SearchMovie.css";
 
 
 type MovieReponse = Pick<Movie, "id" | "title" | "poster_url" | "release_date">;
 
 const SearchMovie = () => {
-  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState<MovieReponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSearch = async () => {
+  const handleSearch = async (query: string) => {
     if (!query.trim()) return;
 
     setLoading(true);
@@ -31,24 +31,7 @@ const SearchMovie = () => {
   return (
     <div className="search-container">
       <h2 className="search-heading">Search for a Movie</h2>
-      <form
-        className="search-controls"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSearch();
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Enter movie title"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="search-input"
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </form>
+      <MovieSearchBar onSearch={handleSearch} />
 
       {loading && <p>Loading...</p>}
       {error && <p className="search-error">{error}</p>}
