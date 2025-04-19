@@ -7,11 +7,11 @@ const WatchedMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
   const uniqueGenres = Array.from(
     new Set(movies.flatMap((movie) => movie.genres.map((g) => g.name)))
-  );
+  ).sort((a, b) => a.localeCompare(b));
 
   useEffect(() => {
     const getMovies = async () => {
@@ -31,31 +31,45 @@ const WatchedMovies = () => {
     getMovies();
   }, []);
 
-  const filteredMovies = selectedGenre
-    ? movies.filter((movie) =>
-        movie.genres.some((genre) => genre.name === selectedGenre)
-      )
-    : movies;
+  const filteredMovies =
+    selectedGenres.length > 0
+      ? movies.filter((movie) =>
+          movie.genres.some((genre) => selectedGenres.includes(genre.name))
+        )
+      : movies;
+
+  const toggleGenre = (genre: string) => {
+    setSelectedGenres((prev) =>
+      prev.includes(genre)
+        ? prev.filter((g) => g !== genre)
+        : [...prev, genre]
+    );
+  };
 
   return (
     <div className="search-container">
-      <h2 className="search-heading">Watched</h2>
+      <h2 className="search-heading oooh-baby-regular">Watch History</h2>
 
       {loading && <p>Loading...</p>}
       {error && <p className="search-error">{error}</p>}
 
-      <select
-        value={selectedGenre ?? ""}
-        onChange={(e) => setSelectedGenre(e.target.value || null)}
-        className="genre-filter"
-      >
-        <option value="">All Genres</option>
+      <div className="genre-tags">
+        <span
+          className={`genre-tag ${selectedGenres.length === 0 ? "selected" : ""}`}
+          onClick={() => setSelectedGenres([])}
+        >
+          All Genres
+        </span>
         {uniqueGenres.map((genre) => (
-            <option key={genre} value={genre}>
-                {genre}
-            </option>
+          <span
+            key={genre}
+            className={`genre-tag ${selectedGenres.includes(genre) ? "selected" : ""}`}
+            onClick={() => toggleGenre(genre)}
+          >
+            {genre}
+          </span>
         ))}
-      </select>
+      </div>
 
       {filteredMovies.length > 0 && (
         <div className="movies-grid">
