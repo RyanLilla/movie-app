@@ -48,7 +48,7 @@ const WatchedMovies = () => {
 
   return (
     <div className="search-container">
-      <h2 className="search-heading dirty-dancing-title-alt1">Watch History</h2>
+      <h2 className="search-heading oooh-baby-regular">Watch History</h2>
 
       {loading && <p>Loading...</p>}
       {error && <p className="search-error">{error}</p>}

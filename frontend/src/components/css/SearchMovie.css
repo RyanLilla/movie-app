@@ -126,25 +126,39 @@
   border-color: #1e40af;
 }
 
+/* Dirty Dancing Title Style #1 - Unused */
 .dirty-dancing-title {
-  font-family: 'Pacifico', cursive; /* swap in a closer match if you find a better font */
+  font-family: 'Pacifico', cursive;
   font-size: 4rem;
-  color: #a02ebf; /* purple-magenta similar to the logo */
+  color: #a02ebf;
   font-style: italic;
   transform: rotate(-5deg);
   letter-spacing: 2px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-.dirty-dancing-title-alt1 {
-  font-family: 'Pacifico', cursive; /* swap in a closer match if you find a better font */
+/* Dirty Dancing Title Style #2 - Unused */
+.dirty-dancing-title-alt {
+  font-family: 'Pacifico', cursive;
   font-size: 4rem;
-  color: #a02ebf; /* purple-magenta similar to the logo */
+  color: #a02ebf;
   font-style: italic;
   transform: rotate(-5deg);
   letter-spacing: 2px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   background: linear-gradient(to right, #a02ebf, #f048b3);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Dirty Dancing Title Style #3 - Unused */
+.oooh-baby-regular {
+  font-family: "Oooh Baby", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 6rem;
+  color: #a02ebf;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
